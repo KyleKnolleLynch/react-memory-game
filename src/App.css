@@ -22,6 +22,6 @@ button:hover {
 .card-grid {
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(4, minmax(100px, 1fr));
-  gap: 2rem;
+  gap: 1rem;
   margin: 2rem auto;
 }

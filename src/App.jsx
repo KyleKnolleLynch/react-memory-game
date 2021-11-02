@@ -3,12 +3,12 @@ import './App.css'
 import Card from './components/Card'
 
 const cardImages = [
-  { src: '/images/bear.jpg' },
-  { src: '/images/tiger.jpg' },
-  { src: '/images/alligator.jpg' },
-  { src: '/images/o\'possum.jpg' },
-  { src: '/images/panda.jpg' },
-  { src: '/images/gorilla.jpg' },
+  { src: '/images/bear.jpg', matched: false },
+  { src: '/images/tiger.jpg', matched: false },
+  { src: '/images/alligator.jpg', matched: false },
+  { src: '/images/o\'possum.jpg', matched: false },
+  { src: '/images/panda.jpg', matched: false },
+  { src: '/images/gorilla.jpg', matched: false },
 ]
 
 const App = () => {
@@ -38,29 +38,45 @@ const App = () => {
     setChoiceTwo(null)
     setTurns(prevTurn => ++prevTurn)
   }
- 
+
   //  check to see if users two choices match - using useEffect
   useEffect(() => {
     if (choiceOne && choiceTwo) {
-      if (choiceOne === choiceTwo) {
+      if (choiceOne.src === choiceTwo.src) {
+        setCards(prevCards => prevCards.map(card => {
+          if (card.src === choiceOne.src) {
+            return { ...card, matched: true }
+          } else {
+            return card
+          }
+        }))
+
         resetTurn()
-        console.log('Match!')
+
       } else {
-        resetTurn()
-        console.log('No Match!')
+        setTimeout(() => {
+          resetTurn()
+        }, 600)
+
       }
     }
   }, [choiceOne, choiceTwo])
+
 
   return (
     <div className='App'>
       <h1>Memory Game</h1>
       <button onClick={shuffleCards}>
-        {turns === 0 ? 'Start' : 'Restart'}
+        {cards.length === 0 ? 'Start' : 'Restart'}
       </button>
       <div className="card-grid">
         {cards.map(card => (
-          <Card key={card.id} {...card} handleChoice={handleChoice} />
+          <Card
+            key={card.id}
+            card={card}
+            handleChoice={handleChoice}
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
+          />
         ))}
       </div>
       <p> Turns left: {turns}</p>
