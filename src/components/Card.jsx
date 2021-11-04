@@ -1,9 +1,9 @@
 import './card-component.css'
 
-const Card = ({ card, flipped, handleChoice }) => {
+const Card = ({ card, flipped, handleChoice, disabled }) => {
 
     const handleClick = () => {
-        handleChoice(card)
+        !disabled && handleChoice(card)
     }
 
     return (

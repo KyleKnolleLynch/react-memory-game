@@ -3,25 +3,44 @@
   margin: 40px auto;
 }
 
+h1 {
+  font-size: 2.3rem;
+}
+
 button {
   margin-top: 0.5rem;
-  padding: 6px 12px;
+  padding: 2px 12px 5px;
   background: none;
   border: 2px solid hsl(0 0% 100%);
   border-radius: 4px;
   color: hsl(0 0% 100%);
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
 }
 
 button:hover {
-  background: hsl(29, 56%, 44%);
+  background: hsl(29, 67%, 54%);
 }
 
 .card-grid {
   display: grid;
-  grid-template: repeat(3, 1fr) / repeat(4, minmax(100px, 1fr));
-  gap: 1rem;
-  margin: 2rem auto;
+  grid-template: repeat(4, 1fr) / repeat(3, minmax(100px, 1fr));
+  gap: 0.8rem;
+  margin: 2rem 1rem;
+}
+
+@media screen and (min-width: 600px) {
+  h1 {
+    font-size: revert;
+  }
+
+  button {
+    font-size: 1.3rem;
+    padding: 2px 12px 8px;
+  }
+
+  .card-grid {
+    grid-template: repeat(3, 1fr) / repeat(4, minmax(100px, 1fr));
+  }
 }
